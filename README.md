@@ -1,4 +1,4 @@
-# NOTE.md - RFQ parser
+# README.md - RFQ parser
 
 ## Approach
 `parse_rfq()` is rule-based, using only Python's `re` module. The text is lower-cased and cleaned (`1,50,000` -> `150000`, `lac` -> `lakh`, `hazar` -> `hazaar`). Category comes from ordered keyword patterns (specific ones like fibc/bopp before generic ones like box). GSM and micron are read with regex. For quantity I look at every number, drop specs and dimensions (gsm, mic, inch, ply), treat kg/mt figures next to words like "capacity" or "bags" as fill weight, and pick the count (`40 hazaar`, `500 pcs`) as the order quantity. Location is matched against a city/country list, with fallbacks for unseen places ("to X", "X mein", the last word).
